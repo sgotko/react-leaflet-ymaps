@@ -1,0 +1,28 @@
+{
+  "name": "react-leaflet-ymaps",
+  "version": "1.0.0",
+  "description": "Plugin for react-leafler for Yandex.Maps.",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgotko/react-leaflet-ymaps.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgotko/react-leaflet-ymaps/issues"
+  },
+  "homepage": "https://github.com/sgotko/react-leaflet-ymaps#readme",
+  "dependencies": {
+    "leaflet": "^1.8.0",
+    "react-leaflet": "^4.0.0",
+    "typescript": "^4.6.4",
+    "ymaps": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.7.10",
+    "@types/react-leaflet": "^2.8.2"
+  }
+}
