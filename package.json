@@ -2,11 +2,13 @@
     "name": "react-leaflet-ymaps",
     "version": "1.0.0",
     "description": "Plugin for react-leafler for Yandex.Maps.",
+    "private": true,
     "main": "src/index.ts",
-    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc"
+        "build": "webpack",
+        "babel": "./node_modules/.bin/babel src --out-file ./build/index.js",
+        "example": "webpack --config=webpack.example.config.js"
     },
     "repository": {
         "type": "git",
@@ -21,10 +23,24 @@
         "leaflet": "^1.8.0",
         "react-leaflet": "^4.0.0",
         "typescript": "^4.6.4",
+        "webpack": "^5.74.0",
         "ymaps": "^0.2.1"
     },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
     "devDependencies": {
+        "@babel/core": "^7.18.9",
+        "@babel/preset-env": "^7.18.9",
+        "@babel/preset-react": "^7.18.6",
+        "@babel/preset-typescript": "^7.18.6",
         "@types/leaflet": "^1.7.10",
-        "@types/react-leaflet": "^2.8.2"
+        "@types/react-leaflet": "^2.8.2",
+        "babel-loader": "^8.2.5",
+        "ts-loader": "^9.3.1",
+        "webpack-cli": "^4.10.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     }
 }
