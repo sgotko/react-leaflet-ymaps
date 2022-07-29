@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "outDir": "build",
+        "rootDir": "src",
+        "jsx": "react-jsx",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "declaration": true
+    },
+    "exclude": ["node_modules"],
+    "include": ["src"]
+}
