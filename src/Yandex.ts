@@ -12,27 +12,25 @@ export enum YandexMapType {
 
 // https://tech.yandex.com/maps/doc/jsapi/2.1/ref/reference/Map-docpage/#Map__param-options
 export type YandexMapOptions = {
-    type: YandexMapType;
     baloonAutoPan?: boolean;
     suppressMapOpenBlock?: boolean;
     yandexMapDisablePoiInteractivity?: boolean;
-    opacity: number;
 };
 
 export type YandexLayerOptions = {
-    url: string;
+    url?: string;
+    opacity: number;
     mapOptions?: YandexMapOptions;
 };
 
 export class Yandex extends L.Layer {
     public static defaultOptions: YandexLayerOptions = {
         url: "",
+        opacity: 1,
         mapOptions: {
-            type: YandexMapType.map,
             baloonAutoPan: false,
             suppressMapOpenBlock: true,
             yandexMapDisablePoiInteractivity: true,
-            opacity: 1,
         },
     };
 
@@ -52,8 +50,22 @@ export class Yandex extends L.Layer {
         super();
         this.type = type;
         this.options = { ...options, ...Yandex.defaultOptions };
+        // this.initialize(type, options);
         L.Util.setOptions(this, options);
     }
+
+    // public initialize(type, options) {
+    //     // if (typeof type === "object") {
+    //     //     options = type;
+    //     //     type = false;
+    //     // }
+    //     L.Util.setOptions(this, options);
+    //     // console.log(options1);
+    //     // if (type) {
+    //     //     options.type = type;
+    //     // }
+    // }
+
     public _setStyle(el, style) {
         for (let prop in style) {
             el.style[prop] = style[prop];
@@ -63,10 +75,10 @@ export class Yandex extends L.Layer {
     public _initContainer(parentEl: HTMLElement | undefined) {
         let _container = L.DomUtil.create(
             "div",
-            "leaflet-ymaps-container leaflet-pane leaflet-tile-pane"
+            "leaflet-yandex-container leaflet-pane leaflet-tile-pane"
         );
 
-        L.DomUtil.setOpacity(_container, this.options.mapOptions.opacity);
+        L.DomUtil.setOpacity(_container, this.options.opacity);
 
         let auto = { width: "100%", height: "100%" };
         this._setStyle(parentEl, auto); // need to set this explicitly,
@@ -127,10 +139,14 @@ export class Yandex extends L.Layer {
         }
         map.on(events, this);
 
-        this.onRemove(() => {
-            map.off(events, this);
-            this._container.remove(); // we do not call this until api is initialized (ymaps API expects DOM element)
-        });
+        this.once(
+            "remove",
+            () => {
+                map.off(events, this);
+                this._container.remove(); // we do not call this until api is initialized (ymaps API expects DOM element)
+            },
+            this
+        );
     }
 
     public _update() {

@@ -1,3 +1,1 @@
-import { default as YandexLayer } from "./YandexLayer";
-
-export default YandexLayer;
+export { default as YandexLayer } from "./YandexLayer";

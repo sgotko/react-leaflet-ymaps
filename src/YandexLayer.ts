@@ -3,7 +3,7 @@ import { TileLayerProps } from "react-leaflet";
 import {
     createTileLayerComponent,
     LeafletContextInterface,
-    LeafletElement,
+	LeafletElement
 } from "@react-leaflet/core";
 import { Yandex, YandexLayerOptions, YandexMapType } from "./Yandex";
 
